@@ -2,8 +2,6 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 
 app = Flask(__name__)
 
-app = Flask(__name__)
-
 @app.route("/")
 def index():
     return "Flask App!"
