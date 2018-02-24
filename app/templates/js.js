@@ -1,8 +1,12 @@
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value; // Display the default slider value
+$("#activeslider").slider({
+  step: 100000,
+  min: 0,
+  max: 200000
+});
 
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-    output.innerHTML = this.value;
-}
+// Without JQuery
+var slider = new Slider("#activeslider", {
+  step: 100000,
+  min: 0,
+  max: 200000
+});
