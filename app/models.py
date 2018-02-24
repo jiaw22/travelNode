@@ -7,4 +7,12 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)    
+        return '<User {}>'.format(self.username)
+
+class Path(db.model):
+    location1 = db.Column(db.String(500), index=True)
+    location2 = db.Column(db.String(500), index=True)
+    location3 = db.Column(db.String(500), index=True)
+    location4 = db.Column(db.String(500), index=True)
+    location5 = db.Column(db.String(500), index=True)
+    currentTime = db.Column(db.DateTime, index=True)
