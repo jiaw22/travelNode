@@ -17,33 +17,34 @@
     </div>
     <div class="w3-display-middle">
       <div class="container">
-        <form action="/display" method="post" id="employForm" <fieldset>
-          <label>Location 1
-          <input type="text" name="location1" id="location1" placeholder="Current Address" required>
-        </label>
-          <br>
-          <label>Location 2
-          <input type="text" name="location2" id="location2" placeholder="Current Address" required>
-          <br>
-          <br>
-          <label>Do you have a personal vehicle?</label>
+        <form action="/display" method="post" id="employForm"
+        <fieldset>
+          <div class="input_fields_wrap">
+            <button class="add_field_button">Add More Locations</button>
+            <div><input type="text" id="location1" name="mytext[]" placeholder="Fill in location"></div>
+          </div>
+        <label>Do you have a personal vehicle?</label>
           <input type="checkbox" id="personalVehicle" name="vehicle" value="hasVehicle">
-          </label>
-          <br>
-          <label>Time limit for journey
+        </label>
+        <br>
+
+        <label>Time limit for journey
             <input type="text" name="timelimit" id="timelimit" placeholder="None">
         </label>
         <br>
+
         <label>How active do you want to be? (Less active-no walking, Very active-completely walking)
           <div class="slidecontainer">
             <input type="range" min="0" max="100" value="50" class="slider" step="50" id="myRange">
           </div>
         </label>
+
         <table width="100%" style="margin-top: -70px">
           <tr>
             <td style="text-align: left;"><label>Less active</label></td>
             <td style="text-align: center;"><label>Moderately active</label></td>
             <td style="text-align: right;"><label>Very active</label></td>
+
         </fieldset>
         <br>
         <br>
