@@ -1,42 +1,47 @@
         <div class="container">
         <form action="/display" method="post" id="employForm"
         <fieldset>
+
         <label>Location 1
           <input type="text" name="location1" id="location1" placeholder="Current Address" required>
         </label>
+
         <label>Location 2
           <input type="text" name="location2" id="location2" placeholder="Current Address" required>
         </label>
+
         <label>Location 3
           <input type="text" name="location3" id="location3" placeholder="Current Address">
         </label>
+
         <label>Location 4
           <input type="text" name="location4" id="location4" placeholder="Current Address">
         </label>
+
         <label>Location 5
           <input type="text" name="location5" id="location5" placeholder="Current Address">
         </label>
-        <label>Do you have a personal vehicle?</label>
-          <input type="radio" id="yesVehicle"
-          name="vehicle" value="yes">
-          <label for="Choice1">Yes</label>
 
-          <input type="radio" id="noVehicle"
-          name="vehicle" value="no">
-          <label for="Choice2">No</label>
+        <label>Do you have a personal vehicle?</label>
+          <input type="checkbox" id="personalVehicle" name="vehicle" value="hasVehicle">
+          <label for="personalVehicle">Do you have a personal vehicle?</label>
         </label>
-        <label>
-        Department
-          <select name="department" required>
-            <option value="sales">Sales</option>
-            <option value="marketing">Marketing</option>
-            <option value="developer">Developer</option>
-            <option value="business">Business Relations</option>
-            <option value="sysAdmin">Systems Administration</option>
-            <option value="drone">Drone</option>
-          </select>
+
+        <label>Time limit for journey
+            <input type="text" name="timelimit" id="timelimit" placeholder="None">
         </label>
-            ... goes on
+
+        <label>How active do you want to be? (Less active-no walking, Very active-completely walking)
+          <div class="range">
+            <input type="range" min="1" max="3" steps="1" value="1">
+          </div>
+          <ul class="range-labels">
+            <li>Very active</li>
+            <li class="active selected">Moderately Active</li>
+            <li>Less active</li>
+          </ul>
+        </label>
+
         </fieldset>
       <button class="button-primary" type="submit" value="Submit" form="employForm">SUBMIT!</button>
     </form>
