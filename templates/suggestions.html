@@ -1,24 +1,8 @@
-<html>
-<head>
-    <title>Website</title>
-<style>
-@import url(http://fonts.googleapis.com/css?family=Amatic+SC:700);
-
-body{
-    text-align: center;
-}
-h1{
-    font-family: 'Amatic SC', cursive;
-    font-weight: normal;
-    color: #8ac640;
-    font-size: 2.5em;
-}
-
-</style>
-
+{% extends "layout.html" %}
 </head>
 <body>
- {% block body %}{% endblock %}
-
+ {% block body %}
+ <h1> This is the suggestions page. </h1>
+ {% endblock %}
 </body>
 </html>
