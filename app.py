@@ -3,7 +3,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Index!"
+    return render_template(
+        'index.html',name=name)
 
 @app.route("/route")
 def hello():
@@ -18,4 +19,4 @@ def members():
 #     return name
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='travelNode.tech', port=80)
