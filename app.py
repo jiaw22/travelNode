@@ -2,16 +2,20 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 
 app = Flask(__name__)
 
-app = Flask(__name__)
-
 @app.route("/")
 def index():
-    return "Flask App!"
-
-@app.route("/hello/<string:name>/")
-def hello(name):
     return render_template(
         'index.html',name=name)
+
+@app.route("/route")
+def route():
+    return render_template(
+        'route.html',name=name)
+
+@app.route("/suggestions")
+def suggestions():
+    return render_template(
+        'suggestions.html',name=name)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
