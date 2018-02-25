@@ -13,20 +13,16 @@ class Graph():
 
     # A utility function to print the constructed MST stored in parent[]
     def printMST(self, parent):
-        #route = []
+        info = []
         print "Edge \tWeight"
-        for i in range(1,self.V):
+        for i in range(0,self.V-1):
+            info.append((parent[i], self.graph[i][parent[i]]))
             print parent[i],"-",i,"\t",self.graph[i][ parent[i] ]
+                  #parent[i] = beginning point
         #    route.append(parent[i])
         #return route
+        return info
 
-    '''def getPath(self, parent):
-        route = []
-        #print "Edge \tWeight \tCost"
-        for i in range(1,self.V):
-            route.append(parent[i])
-        return route
-    '''
     # A utility function to find the vertex with minimum distance value, from
     # the set of vertices not yet included in shortest path tree
     def minKey(self, key, mstSet):
@@ -73,7 +69,26 @@ class Graph():
                         key[v] = self.graph[u][v]
                         parent[v] = u
             #print(parent)
-        self.printMST(parent)
+        return self.printMST(parent)
+
+        # route_set = []
+        # #print "Edge \tWeight \tCost"
+        # for i in range(0,self.V):
+        #     if (i==0):
+        #         print "H346346346436364ELLO"
+        #
+        #         route_set.append((0,i))
+        #     else:
+        #         print "HELLO"
+        #         print route_set[0][0]
+        #         print route_set[len(route_set)-1][1]
+        #         if (i == route_set[0][0]): #
+        #              route_set.insert(0,(parent[i],i))
+        #              print "HELLOerter"
+        #         elif  (i == route_set[len(route_set)-1][1]):
+        #             print "HE5353445LLO"
+        #             route_set.append((parent[i],i))
+        # return route_set
         #print key
         #route = (self.getPath(parent))
         #return route
@@ -130,35 +145,45 @@ def construct_whole(data1, time, own_vehicle, max_time, activity_level): #num_lo
         accessories.append(acc)
 
     g.graph = matrix
-    node_order = g.primMST()
-    if not node_order:
-        print "hello"
+    nodess = g.primMST()
+    locs = []
+    legs = []
+    for i in range(len(nodess)):
+        locs.append(time[i+1])
+        legs.append((accessories[nodess[i][0]][nodes[i][1]][0], accessories[nodess[i][0]][nodes[i][1]][1], accessories[nodess[i][0]][nodes[i][1]][2], accessories[nodess[i][0]][nodes[i][1]][3]))
 
+#mode, time @ loc, walking time, cost
+    # print node_order
+    # print [node_order[0]][node_order[1]][1]
     # acc_time = 0
     # for i in range(len(node_order)):
     #     acc_time = acc_time + accessories[node_order[i]][node_order[1]][1]
 
     # acc_time = accessories[node_order[0]][node_order[1]][1] + accessories[node_order[1]][node_order[2]][1]+accessories[node_order[2]][node_order[3]][1]+accessories[node_order[3]][node_order[4]][1]
-    acc_time = 0
-    for x in range(len(node_order)):
-        acc_time = acc_time + accessories[node_order[x]][node_order[1]][1]
+    # acc_time = 0
+    # #for x in range(len(node_order)):
+    # acc_time = acc_time + (accessories[node_order[0]][node_order[1]][1] + accessories[node_order[1]][node_order[2]][1] + accessories[node_order[2]][node_order[3]][1] + accessories[node_order[3]][node_order[4]][1])
 
-    total_dist = 0
-    for y in range(len(node_order)):
-        total_dist = total_dist + accessories[node_order[y]][node_order[y+1]][2]
-
-    # total_dist = accessories[node_order[0]][node_order[1]][2] +accessories[node_order[1]][node_order[2]][2] +accessories[node_order[2]][node_order[3]][2] +accessories[node_order[3]][node_order[4]][2]
-
-    total_cost = 0
-    for z in range(len(node_order)):
-        total_cost = total_cost + accessories[node_order[z]][node_order[z+1]][3]
-    # total_cost = accessories[node_order[0]][node_order[1]][3] +accessories[node_order[1]][node_order[2]][3] +accessories[node_order[2]][node_order[3]][3] +accessories[node_order[3]][node_order[4]][3]
-
-    if acc_time > max_time:
-        warning = "OVERTIME"
-    else:
-        warning = "NO WARNING"
-
+    # acc_time = 0
+    # for x in range(len(node_order)):
+    #     acc_time = acc_time + accessories[node_order[i]][node_order[1]][1]
+    #
+    # total_dist = 0
+    # for y in range(len(node_order)):
+    #     total_dist = total_dist + accessories[node_order[y]][node_order[y+1]][2]
+    #
+    # # total_dist = accessories[node_order[0]][node_order[1]][2] +accessories[node_order[1]][node_order[2]][2] +accessories[node_order[2]][node_order[3]][2] +accessories[node_order[3]][node_order[4]][2]
+    #
+    # total_cost = 0
+    # for z in range(len(node_order)):
+    #     total_cost = total_cost + accessories[node_order[z]][node_order[z+1]][3]
+    # # total_cost = accessories[node_order[0]][node_order[1]][3] +accessories[node_order[1]][node_order[2]][3] +accessories[node_order[2]][node_order[3]][3] +accessories[node_order[3]][node_order[4]][3]
+    #
+    # if acc_time > max_time:
+    #     warning = "OVERTIME"
+    # else:
+    #     warning = "NO WARNING"
+    #
     leg_info = '{"addresses": [' + time(node_order[0]) + '", "' + time(node_order[1]) + '", "'+ time(node_order[2]) + '", "'+ time(node_order[3]) + '", "' + time(node_order[4]) +'"],'
     leg1 = '"leg1": { "transport": ' + accessories[node_order[0]][node_order[1]][0] + ', "legTime": ' + accessories[node_order[0]][node_order[1]][1] + ', "legDist": ' + accessories[node_order[0]][node_order[1]][2] + ', "cost": ' + accessories[node_order[0]][node_order[1]][3]
     leg1 =  leg1 + '"},'
