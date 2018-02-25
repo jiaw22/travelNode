@@ -4,6 +4,7 @@ import simplejson
 import json
 from uber import *
 from google_walking import *
+from min_spanning_tree import *
 
 def generateTimeParam(data, addr):
     times = []
@@ -64,7 +65,12 @@ def callCaroline(orgdata, data1, time):
         own_vehicle = "no"
     max_time = data["timelimit"]
     activity_level = data["active"]
-    caroline(data1, time, own_vehicle, max_time, activity_level)
+    print data1
+    print time
+    print own_vehicle
+    print max_time
+    print activity_level
+    narrow_down(data1, time, own_vehicle, max_time, activity_level)
 
 
 string = """{
