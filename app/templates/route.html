@@ -313,7 +313,7 @@
     directionsService.route({
       origin: obj.addresses[0], //document.getElementById('start').value,
       destination: obj.addresses[obj.addresses.length-1],
-      waypoints: waypts,
+      waypoints: waypts.slice(1,waypts.length - 1),
       optimizeWaypoints: true,
       travelMode: 'DRIVING'
     }, function(response, status) {
@@ -342,7 +342,6 @@
 <script src="../jquery/jquery.min.js"></script>
 <script src="js.js"></script>
 <link href="../static/style2.css" rel="stylesheet">
-<link href="../static/style.scss" rel="stylesheet">
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm5l8eUBzZXal5kBugg3UdvxiM1jflU8s&callback=initMap">
 </script>
 

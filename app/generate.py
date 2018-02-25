@@ -73,7 +73,7 @@ def callCaroline(orgdata, data1, time):
     print own_vehicle
     print max_time
     print activity_level
-    # narrow_down(data1, time, own_vehicle, max_time, activity_level)
+    construct_whole(data1, time, own_vehicle, max_time, activity_level)
 
 
 string = """{

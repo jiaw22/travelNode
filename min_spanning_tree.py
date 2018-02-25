@@ -17,6 +17,12 @@ class Graph():
         for i in range(1,self.V):
             print parent[i],"-",i,"\t",self.graph[i][ parent[i] ]
 
+    def getPath(self, parent):
+        route = [(0,0)] #(next node, weight)
+        #print "Edge \tWeight \tCost"
+        for i in range(1,self.V):
+            route.append((i,self.graph[i][parent[i]]))
+        return route
     # A utility function to find the vertex with minimum distance value, from
     # the set of vertices not yet included in shortest path tree
     def minKey(self, key, mstSet):
@@ -65,41 +71,103 @@ class Graph():
             #print(parent)
 
         #print key
-        self.printMST(parent)
+        route = (self.getPath(parent))
+        return route
 
 #PARAMETERS
 
-num_locs = 5
-g  = Graph(num_locs)
-total_time_max = 30
-personal_car = 'Yes'
-act_lvl = 0
-warning = True
+#num_locs = 5
+#g  = Graph(num_locs)
+#total_time_max = 30
+#personal_car = 'Yes'
+#act_lvl = 0
+#warning = True
 
 #for each location, choose either car time or
 #returns: (i.e. for 'A')[0 30 10 20 4]
-def narrow_down(num_locs, personal_car, act_lvl):
-    for k in range(num_locs):
-        current_leg = #API shit
-        if (personal_car == 'Yes') || (act_lvl < 100) || (leg_est_time > 5): #global user
-            time = car_time #API
-        else:
-            time = walk_time #API
+data1 = [(u'232 East Ave, Ithaca, NY 14850, USA', u'111 Dryden Rd, Ithaca, NY 14850, USA', 120, 9.0, 849, 0.7)]
+time = [(u'232 East Ave, Ithaca, NY 14850, USA', u'50'), (u'111 Dryden Rd, Ithaca, NY 14850, USA', u'50')]
+own_vehicle = "no"
+max_time = 4
+activity_level = 50
+'''
+def construct_whole(data, time, own_vehicle, max_time, activity_level):
+    g = Graph(len(time))
+    matrix = []
+    for i in range(len(time)): #for every row
+        row = construct_row(data1, time, own_vehicle, max_time, activity_level) #populating a row
+        matrix.append(row)
+    g.graph = matrix
+    g.primMST();
+'''
+def construct_whole(data1, time, own_vehicle, max_time, activity_level): #num_locs, personal_car, act_lvl
+    leg_info = """{"addresses": ['+ locA + ', '+ locB +', '+ locC +', '+ locD + ', '+ locE + '],
+      "leg1": {
+        "transport": ' + transpA + ',
+        "legTime": ' + timeA + ',
+        "legDist": ' + distA + ',
+        "cost": ' + costA + '
+      },
+      "leg2": {
+        "transport": ' + transpB + ',
+        "legTime": ' + timeB + ',
+        "legDist": ' + distB + ',
+        "cost": ' + costB + '
+      },
+      "leg3": {
+        "transport": ' + transpC + ',
+        "legTime": ' + timeC + ',
+        "legDist": ' + distC + ',
+        "cost": ' + costC + '
+      },
+      "leg4": {
+        "transport": ' + transpD + ',
+        "legTime": ' + timeD + ',
+        "legDist": ' + distD + ',
+        "cost": ' + costD + '
+      },
+      "totaltime" : ' + acc_time + ',
+      "totaldistance": ' + totaldist + ',
+      "totalcost": ' + totalcost + ',
+      "warning": ' + warning + '
+    }"""
+    #print time
+    g = Graph(len(time))
+    matrix = []
+    for i in range(len(time)):
+        row = []
+        car_cost = []
+        using_uber = []
+        for j in range(len(time)): #for every column
+            est_loc_time = time[j][1]
+            #print type(time)
+            if (((own_vehicle == 'Yes') | (activity_level < 100)) | (est_loc_time > 5)): #loc_est_time
+                t = data1[0][3] #Uber time
+                using_uber.append(data1[0][2])
+            else:
+                t = data1[0][4] #walking time
+                if (j==i):
+                    t = 0
+                using_uber.append(0)
 
+            row.append(t)
+            car_cost.append(using_uber)
+        matrix.append(row)
+    g.graph = matrix
+    route = g.primMST()#, leg_info
 
-#constructing matrix
-matrix = []
-for i in range(num_locs):
-    row = []
-    for j in range(num_locs):
-        row.append(...)
-    matrix.append(row)
+    print car_cost
+    ultimate_route = []
+    for i in range(len(route)):
+        ultimate_route.append((route[i],car_cost[i]))
+    print ultimate_route
 
-g.graph = matrix
-g.primMST();
+construct_whole(data1, time, own_vehicle, max_time, activity_level)
+#g.graph = matrix
+#g.primMST();
 
-if ( key > total_time_max):
-    warning = True
+#if ( key > total_time_max):
+#    warning = True
 
 #str that was supposed to be a json file ....
 leg_info = """{"addresses": ['+ locA + ', '+ locB +', '+ locC +', '+ locD + ', '+ locE + '],
