@@ -17,6 +17,7 @@ $(document).ready(function() {
     })
 });
 
+/*
 {
   "addresses": ["New York, NY", "San Francisco, CA", "Cupertino, CA", "Los Angeles, CA", "San Diego, CA"],
   "leg1": {
@@ -48,3 +49,4 @@ $(document).ready(function() {
   "totalcost": 10,
   "warning": "false"
 }
+*/
