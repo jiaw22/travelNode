@@ -21,7 +21,7 @@ def getTimeAndDistance(startLong,startLat,endLong,endLat):
     distance = distance[:-3]
     distance = float(distance)
 
-    return distance, time;
+    return (distance, time)
 
-
-print getTimeAndDistance(40.6655101,-73.89188969999998,40.6905615,-73.9976592)
+#
+# print getTimeAndDistance(40.6655101,-73.89188969999998,40.6905615,-73.9976592)

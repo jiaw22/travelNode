@@ -1,0 +1,30 @@
+'{"addresses": ['+ locA + ', '+ locB +', '+ locC +', '+ locD + ', '+ locE + '],
+  "leg1": {
+    "transport": ' + transpA + ',
+    "legTime": ' + timeA + ',
+    "legDist": ' + distA + ',
+    "cost": ' + costA + '
+  },
+  "leg2": {
+    "transport": ' + transpB + ',
+    "legTime": ' + timeB + ',
+    "legDist": ' + distB + ',
+    "cost": costB
+  },
+  "leg3": {
+    "transport": transpC,
+    "legTime": timeC,
+    "legDist": distC,
+    "cost": costC
+  },
+  "leg4": {
+    "transport": transpD,
+    "legTime": timeD,
+    "legDist": distD,
+    "cost": costD
+  },
+  "totaltime" : acc_time,
+  "totaldistance": totaldist,
+  "totalcost": totalcost,
+  "warning": warning
+}'

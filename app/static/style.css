@@ -131,3 +131,9 @@ opacity: 0;}
   -o-transition: all 600ms ease;
   transition: all 600ms ease;
 }
+
+input.time_spent {
+  width: 10%;
+  display: inline-block;
+  font-size: 10px;
+}
