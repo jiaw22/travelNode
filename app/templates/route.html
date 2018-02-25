@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByGsgAQ_Q8gNTc-LBboVjO-eA4SMjHGtw&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm5l8eUBzZXal5kBugg3UdvxiM1jflU8s&libraries=places"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -14,45 +14,63 @@
 <link href="../static/style.css" rel="stylesheet">
 <link href="../static/style.scss" rel="stylesheet">
 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="../jquery/jquery.min.js"></script>
+<script src="js.js"></script>
+<link href="../static/style2.css" rel="stylesheet">
+<link href="../static/style.scss" rel="stylesheet">
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hpcmxleWthYmlyIiwiYSI6ImNqZTF0d216ODZhMm4ycnFoYzhlajBoYmEifQ.ebRPQL4RxH01uvoOVa1IUA';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v9'
+  });
+</script>
+
 <body>
+
   <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
     <div class="w3-display-topleft w3-padding-large w3-xlarge">
       TravelNode
     </div>
-    <div class="w3-display-middle">
-      <div class="container">
-        <form action="/display" method="post" id="employForm" <fieldset>
-          <!-- how to loop through all locations+modes of transport? -->
-          <label>Location 1 Address</label>
-          <br>
-          <label>Mode of transport + time to get there 1</label>
-          <br>
-          <label>Location 2 Address</label>
-          <br>
-          <label>Mode of transport + time to get there 1</label>
-          <br>
-          <label>Location 3 Address</label>
-          <br>
-          <label>Mode of transport + time to get there 1</label>
-          <br>
-          <label>Location 4 Address</label>
-          <br>
-          <label>Mode of transport + time to get there 1</label>
-          <br>
-          <br>
-          <br>
-          <label>Total time: </label>
-          <br>
-          <label>Total costs: </label>
-          <br>
-          <label>Total distance: </label>
-          </fieldset>
-          <br>
-          <br>
-          <button class="button-primary" type="submit" value="Submit" form="employForm">Edit fields</button>
-        </form>
-      </div>
+    <!-- Side navigation -->
+    <div class="sidenav">
+      <label>Location 1 Address</label>
+      <br>
+      <label> Walk 1.4 miles - 20 minutes</label>
+      <br>
+      <br>
+      <label>Location 2 Address</label>
+      <br>
+      <label> Take an uber for 5 miles ($15) - 10 minutes</label>
+      <br>
+      <br>
+      <label>Location 3 Address</label>
+      <br>
+      <label> Bus for 3 miles ($1.50) - 5 minutes </label>
+      <br>
+      <br>
+      <label>Location 4 Address</label>
+      <br>
+      <label> Walk for 0.5 miles - 8 minutes </label>
+      <br>
+      <br>
+      <br>
+      <label>Total time: 43 minutes </label>
+      <br>
+      <label>Total costs: $16.50 </label>
+      <br>
+      <label>Total distance: 9.9 miles</label>
     </div>
+
+    <!-- Page content -->
+    <div id="main">
+      <div id='map' style='width: 400px; height: 300px;'></div>
+    </div>
+  </div>
 
 </body>
 

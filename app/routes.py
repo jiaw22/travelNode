@@ -10,3 +10,7 @@ def main():
 def display():
      result = request.form
      return jsonify(request.form)
+
+@app.route('/route', methods=["GET", "POST"])
+def route():
+     return render_template('route.html', title='Travel Faster, Travel Better pt. 2')
