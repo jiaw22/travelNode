@@ -1,120 +1,337 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Waypoints in directions</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-        float: left;
-        width: 70%;
-        height: 100%;
-      }
-      #directions-panel {
-        margin-top: 10px;
-        background-color: #FFEE77;
-        padding: 10px;
-        overflow: scroll;
-        height: 174px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
 
-    <div class="sidenav">
-      <label>Location 1 Address</label>
-      <br>
-      <label> Walk 1.4 miles - 20 minutes</label>
-      <br>
-      <br>
-      <label>Location 2 Address</label>
-      <br>
-      <label> Take an uber for 5 miles ($15) - 10 minutes</label>
-      <br>
-      <br>
-      <label>Location 3 Address</label>
-      <br>
-      <label> Bus for 3 miles ($1.50) - 5 minutes </label>
-      <br>
-      <br>
-      <label>Location 4 Address</label>
-      <br>
-      <label> Walk for 0.5 miles - 8 minutes </label>
-      <br>
-      <br>
-      <br>
-      <label>Total time: 43 minutes </label>
-      <br>
-      <label>Total costs: $16.50 </label>
-      <br>
-      <label>Total distance: 9.9 miles</label>
-    </div>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Waypoints in directions</title>
+</head>
 
-    <div id="directions-panel"></div>
-    </div>
-    <script>
-      function initMap() {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 6,
-          center: {lat: 41.85, lng: -87.65}
-        });
-        directionsDisplay.setMap(map);
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-      }
+<body>
+  <div id="map"></div>
 
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var waypts = [];
-        var checkboxArray = ["100 Universal City Plaza, Universal City, CA 91608, USA", "Cleveland, OH", "Ithaca, NY"];//document.getElementById('waypoints');
-        for (var i = 0; i < checkboxArray.length; i++) {
-          waypts.push({
-              location: checkboxArray[i],
-              stopover: true
-          });
-        }
-
-        directionsService.route({
-          origin: "Cupertino, CA",//document.getElementById('start').value,
-          destination: "Buffalo, NY",
-          waypoints: waypts,
-          optimizeWaypoints: true,
-          travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-            var route = response.routes[0];
-            var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML = '';
-            // For each route, display summary information.
-            for (var i = 0; i < route.legs.length; i++) {
-              var routeSegment = i + 1;
-              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                  '</b><br>';
-              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-            }
-          } else {
-            window.alert('Directions request failed due to ' + status);
+  <div class="sidenav">
+    <label>Location 1 Address</label>
+    <br>
+    <label> Walk 1.4 miles - 20 minutes</label>
+    <br>
+    <br>
+    <label>Location 2 Address</label>
+    <br>
+    <label> Take an uber for 5 miles ($15) - 10 minutes</label>
+    <br>
+    <br>
+    <label>Location 3 Address</label>
+    <br>
+    <label> Bus for 3 miles ($1.50) - 5 minutes </label>
+    <br>
+    <br>
+    <label>Location 4 Address</label>
+    <br>
+    <label> Walk for 0.5 miles - 8 minutes </label>
+    <br>
+    <br>
+    <br>
+    <label>Total time: 43 minutes </label>
+    <br>
+    <label>Total costs: $16.50 </label>
+    <br>
+    <label>Total distance: 9.9 miles</label>
+  </div>
+  </div>
+  <script>
+    function initMap() {
+      var directionsService = new google.maps.DirectionsService;
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 6,
+        center: {
+          lat: 41.85,
+          lng: -87.65
+        },
+        styles: [{
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#1d2c4d"
+            }]
+          },
+          {
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#8ec3b9"
+            }]
+          },
+          {
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+              "color": "#1a3646"
+            }]
+          },
+          {
+            "featureType": "administrative.country",
+            "elementType": "geometry.stroke",
+            "stylers": [{
+              "color": "#4b6878"
+            }]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#64779e"
+            }]
+          },
+          {
+            "featureType": "administrative.province",
+            "elementType": "geometry.stroke",
+            "stylers": [{
+              "color": "#4b6878"
+            }]
+          },
+          {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.stroke",
+            "stylers": [{
+              "color": "#334e87"
+            }]
+          },
+          {
+            "featureType": "landscape.natural",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#023e58"
+            }]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#283d6a"
+            }]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#6f9ba5"
+            }]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+              "color": "#1d2c4d"
+            }]
+          },
+          {
+            "featureType": "poi.business",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry.fill",
+            "stylers": [{
+              "color": "#023e58"
+            }]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#3C7680"
+            }]
+          },
+          {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#304a7d"
+            }]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#98a5be"
+            }]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+              "color": "#1d2c4d"
+            }]
+          },
+          {
+            "featureType": "road.arterial",
+            "elementType": "labels",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#2c6675"
+            }]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [{
+              "color": "#255763"
+            }]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#b0d5ce"
+            }]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+              "color": "#023e58"
+            }]
+          },
+          {
+            "featureType": "road.local",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "labels",
+            "stylers": [{
+              "visibility": "off"
+            }]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#98a5be"
+            }]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "labels.text.stroke",
+            "stylers": [{
+              "color": "#1d2c4d"
+            }]
+          },
+          {
+            "featureType": "transit.line",
+            "elementType": "geometry.fill",
+            "stylers": [{
+              "color": "#283d6a"
+            }]
+          },
+          {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#3a4762"
+            }]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [{
+              "color": "#0e1626"
+            }]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [{
+              "color": "#4e6d70"
+            }]
           }
+        ]
+      });
+      directionsDisplay.setMap(map);
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      var waypts = [];
+      var checkboxArray = ["100 Universal City Plaza, Universal City, CA 91608, USA", "Cleveland, OH", "Ithaca, NY"]; //document.getElementById('waypoints');
+      for (var i = 0; i < checkboxArray.length; i++) {
+        waypts.push({
+          location: checkboxArray[i],
+          stopover: true
         });
       }
-    </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script src="../jquery/jquery.min.js"></script>
-    <script src="js.js"></script>
-    <link href="../static/style2.css" rel="stylesheet">
-    <link href="../static/style.scss" rel="stylesheet">
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm5l8eUBzZXal5kBugg3UdvxiM1jflU8s&callback=initMap">
-    </script>
-  </body>
+
+      directionsService.route({
+        origin: "Cupertino, CA", //document.getElementById('start').value,
+        destination: "Buffalo, NY",
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: 'DRIVING'
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+          var route = response.routes[0];
+          var summaryPanel = document.getElementById('directions-panel');
+          summaryPanel.innerHTML = '';
+          // For each route, display summary information.
+          for (var i = 0; i < route.legs.length; i++) {
+            var routeSegment = i + 1;
+            summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+              '</b><br>';
+            summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+            summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+            summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+          }
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+  </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="../jquery/jquery.min.js"></script>
+  <script src="js.js"></script>
+  <link href="../static/style2.css" rel="stylesheet">
+  <link href="../static/style.scss" rel="stylesheet">
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm5l8eUBzZXal5kBugg3UdvxiM1jflU8s&callback=initMap">
+  </script>
+</body>
+
 </html>
