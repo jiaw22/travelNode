@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>routepage</title>
+<title>Results</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -8,6 +8,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm5l8eUBzZXal5kBugg3UdvxiM1jflU8s&libraries=places"></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="../jquery/jquery.min.js"></script>
 <script src="js.js"></script>
@@ -346,18 +347,18 @@
 
 <script>
   var obj = JSON.parse('{"addresses": ["New York, NY", "San Francisco, CA", "Cupertino, CA", "Los Angeles, CA", "San Diego, CA"],"leg1": {"transport": "Car","legTime": 4,"legDist": 10,"cost": 0},"leg2": {"transport": "Walking","legTime": 2,"legDist": 5,"cost": 0},"leg3": {"transport": "Uber","legTime": 4,"legDist": 10,"cost": 15},"leg4": {"transport": "Car","legTime": 20,"legDist": 90,"cost": 0},"totaltime" : 4,"totaldistance": 50,"totalcost": 10,"warning": "false"}');
-  var detailstext = '<font color=	"#000000">';
+  var detailstext = '<font color=	"#fff">';
   if (obj.warning == "true") {
     detailstext +=  '<label>WARNING: LOCATIONS ARE TOO FAR APART FOR UBER API</label>';
   } else {
     function createLegDetails(mode, time, cost, dist) {
       var returnString = "";
       if (mode == "Car") {
-        returnString += "Drive for ";
+        returnString += "<span class='line_car'></span>Drive for ";
       } else if (mode == "Walking") {
-        returnString += "Walk for ";
+        returnString += "<span class='line_walk'></span>Walk for ";
       } else if (mode == "Uber") {
-        returnString += "Take an uber for ";
+        returnString += "<span class='line_uber'></span>Take an uber for ";
       }
       var costString = "";
       if (cost != 0) {
@@ -380,16 +381,16 @@
     if (obj.leg1.transport != "") {
       legArray.push(createLegDetails(obj.leg4.transport, obj.leg4.legTime, obj.leg4.cost, obj.leg4.legDist));
     }
-    var detailstext = '<font color=	"#000000">';
+    var detailstext = '<font color=	"#fff"><h2>Optimized Trip</h2>';
     for (i=0; i < obj.addresses.length; i++) {
       if (i != obj.addresses.length-1) {
-          detailstext += "<label>" + obj.addresses[i]+ "</label><br><br><label>"+ legArray[i] +"</label><br><br>"
+          detailstext += "<label>" + obj.addresses[i]+ "</label><br><br><label class='path'>"+ legArray[i] +"</label><br><br>"
       }
       else {
         detailstext += "<label>" + obj.addresses[i]+ "</label><br><br><br>"
       }
     }
-    detailstext += "<label>Total time: " + obj.totaltime + " minutes </label><br><label>Total costs: $" + obj.totalcost + " </label><br><label>Total distance: "+ obj.totaldistance + " miles</label>"
+    detailstext += "<center><table style='text-align: center;'><tr><td><b>" + obj.totaltime + "</b><br />Total Time</td><td><b>" + obj.totalcost + "</b><br />Total Cost</td><td><b>" + obj.totaldistance + "</b><br />Total Distance</td></tr></table></center><br /><a href='/'>try again!</a>"
   }
   document.getElementById("details").innerHTML = detailstext;
 </script>

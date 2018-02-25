@@ -1,10 +1,11 @@
 body, h1 {
-  font-family: "Roboto", sans-serif
+  font-family: "Barlow", sans-serif
 }
 
 body, html {
   height: 100%;
   background-color: gray;
+  font-size: 13px;
 }
 
 .bgimg {
@@ -32,7 +33,7 @@ body, html {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: #95b9ff;
     cursor: pointer;
 }
 
@@ -46,21 +47,21 @@ body, html {
 
 
 input {
-width: 40%;
+width: 30%;
 background-color: #1b1b1bb8;
 border : 1px solid #1b1b1bb8;
-font-family: Roboto;
+font-family: "Barlow";
 padding: 10px;
 color :#fff;
 margin: 5px;
 }
 
 input#location1, input#location2, input#location3, input#location4, input#location5 {
-  width: 80%;
+  width: 85%;
 }
 
 button.add_field_button {
-  font-family: Roboto;
+  font-family: "Barlow";
   background-color: transparent;
   border: 0px;
   padding: 10px;
@@ -69,11 +70,12 @@ button.add_field_button {
   font-size: 10px;
 }
 button.button-primary {
-  background-color: #4CAF50;
+  background-color: #98a5be;
   font-family: Roboto;
   color: #fff;
   border: 0px;
-  padding: 5px 10px;
+  text-transform:  uppercase;
+  padding: 5px 20px;
 }
 
 fieldset {
@@ -82,7 +84,7 @@ fieldset {
 }
 
 a.remove_field {
-color: #d89292;
+color: #023e58;
 text-shadow: 0px 0px 1px 5px #000;
 font-weight: bold;
 margin-left: 20px;
@@ -99,9 +101,10 @@ input#personalVehicle {
 opacity: 0;}
 
 .redBackground{
-    background-color: maroon;
+    background-color: #8c6252;
     padding: 10px;
-    width: 80%;
+    width: 100%;
+    padding-right: 30%;
     text-align: center;
     -webkit-transition: all 600ms ease;
     -moz-transition: all 600ms ease;
@@ -111,10 +114,11 @@ opacity: 0;}
 }
 
 .yep{
-    background-color: blue;
+    background-color: #4e6d70;
     padding: 10px;
-    width: 80%;
+    width: 100%;
     text-align: center;
+    padding-right: 30%;
     -webkit-transition: all 600ms ease;
     -moz-transition: all 600ms ease;
     -ms-transition: all 600ms ease;
@@ -136,4 +140,13 @@ input.time_spent {
   width: 10%;
   display: inline-block;
   font-size: 10px;
+}
+
+h1 {
+  font-family: "Barlow";
+  color: #d8ffcc;
+}
+h4 {
+  font-family: "Barlow";
+  color: #dcdcdc;
 }

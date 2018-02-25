@@ -11,6 +11,7 @@
   <script src="../jquery/jquery.min.js"></script>
   <script src="js.js"></script>
   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+  <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
   <link href="../static/style.css" rel="stylesheet">
@@ -94,11 +95,11 @@
     if($(this).is(":checked")){
       $(this).parent().removeClass("yep",1000);
         $(this).parent().addClass("redBackground",1000);
-        $("#personalVehiclelabel").html("I am travelling by car/foot.").fadeIn('slow');
+        $("#personalVehiclelabel").html("I have my own car").fadeIn('slow');
     }else{
         $(this).parent().removeClass("redBackground",1000);
         $(this).parent().addClass("yep",1000);
-        $("#personalVehiclelabel").html("I am travelling by Uber/foot.").fadeIn('slow');
+        $("#personalVehiclelabel").html("I'm going to use Uber").fadeIn('slow');
     }
 });
       $("#location2").hide();
@@ -162,25 +163,27 @@
 <body onload="initialize()">
   <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
     <div class="w3-display-topleft w3-padding-large w3-xlarge">
-      TravelNode
     </div>
     <div class="w3-display-middle">
       <div class="container">
         <form method="post">
+          <h1>travelNode</h1>
+          <h4>TRAVEL FASTER, TRAVEL BETTER</h4>
           * no two points can be > 100 miles apart
           <fieldset>
 
             <div class="input_fields_wrap">
-              <div><input class="autocomplete" type="text" id="location1" name="location1" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent1" name="location_time1" placeholder="# mins"></div>
-              <div><input class="autocomplete" type="text" id="location2" name="location2" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent2" name="location_time2" placeholder="# mins"></div>
-              <div><input class="autocomplete" type="text" id="location3" name="location3" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent3" name="location_time3" placeholder="# mins"></div>
-              <div><input class="autocomplete" type="text" id="location4" name="location4" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent4" name="location_time4" placeholder="# mins"></div>
-              <div><input class="autocomplete" type="text" id="location5" name="location5" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent5" name="location_time5" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location1" name="location1" placeholder="Destination 1"><input class="time_spent" type="text" id="time_spent1" name="location_time1" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location2" name="location2" placeholder="Destination 2"><input class="time_spent" type="text" id="time_spent2" name="location_time2" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location3" name="location3" placeholder="Destination 3"><input class="time_spent" type="text" id="time_spent3" name="location_time3" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location4" name="location4" placeholder="Destination 4"><input class="time_spent" type="text" id="time_spent4" name="location_time4" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location5" name="location5" placeholder="Destination 5"><input class="time_spent" type="text" id="time_spent5" name="location_time5" placeholder="# mins"></div>
             </div>
             <button class="add_field_button" formaction="">Add More Locations</button><br />
+            Do you have your own vehicle?
             <li class="yep">
               <input type="checkbox" id="personalVehicle" name="personal" value="hasVehicle">
-              <label for="personalVehicle" id="personalVehiclelabel" name="personal">Do you have a personal vehicle?</label>
+              <label for="personalVehicle" id="personalVehiclelabel" name="personal">I'm going to use Uber</label>
             </li>
             <br>
 
@@ -204,7 +207,7 @@
           </fieldset>
           <br>
           <br>
-          <button class="button-primary" type="submit" value="Submit" formaction="/json">Generate my schedule!</button></a>
+          <button class="button-primary" type="submit" value="Submit" formaction="/generate">Generate my schedule!</button></a>
         </form>
       </div>
     </div>
