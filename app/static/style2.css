@@ -5,9 +5,10 @@
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     font-size: 12px;
+    font-color: #000000;
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: #2F4F4F; /* Black */
+    background-color: #FFFFFF; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 0px;
     padding: 20px;
@@ -22,14 +23,6 @@
   width: 100%;
 }
 
-/* The navigation menu links */
-.sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-}
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
