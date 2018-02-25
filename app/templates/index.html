@@ -91,17 +91,6 @@
   <script>
     $(document).ready(function() {
 
-      $("input[type='checkbox']").change(function(){
-    if($(this).is(":checked")){
-      $(this).parent().removeClass("yep",1000);
-        $(this).parent().addClass("redBackground",1000);
-        $("#personalVehiclelabel").html("I have my own car").fadeIn('slow');
-    }else{
-        $(this).parent().removeClass("redBackground",1000);
-        $(this).parent().addClass("yep",1000);
-        $("#personalVehiclelabel").html("I'm going to use Uber").fadeIn('slow');
-    }
-});
       $("#location2").hide();
       $("#location3").hide();
       $("#location4").hide();
@@ -180,11 +169,6 @@
               <div><input class="autocomplete" type="text" id="location5" name="location5" placeholder="Destination 5"><input class="time_spent" type="text" id="time_spent5" name="location_time5" placeholder="# mins"></div>
             </div>
             <button class="add_field_button" formaction="">Add More Locations</button><br />
-            Do you have your own vehicle?
-            <li class="yep">
-              <input type="checkbox" id="personalVehicle" name="personal" value="hasVehicle">
-              <label for="personalVehicle" id="personalVehiclelabel" name="personal">I'm going to use Uber</label>
-            </li>
             <br>
 
             <label>Time limit for journey (in hours)

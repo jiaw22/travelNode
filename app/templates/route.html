@@ -38,6 +38,11 @@
 <body>
 
   <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+    <body>
+    <div id="json" style="display: none;">
+      {{results}}
+    </div>
+  </body>
     <div class="w3-display-topleft w3-padding-large w3-xlarge">
       TravelNode
     </div>
@@ -51,7 +56,13 @@
 
 </body>
 <script>
-  var obj = JSON.parse('{"addresses": ["3146 Cascadilla Hall, Ithaca NY 14850", "3270 Balch Hall, Ithaca NY 14850", "203 N Aurora St, Ithaca NY 14850", "Klarman Hall, Ithaca NY 14850", "151 Dryden Road, Ithaca NY 14850"],"leg1": {"transport": "Car","legTime": 4,"legDist": 10,"cost": 0},"leg2": {"transport": "Walking","legTime": 2,"legDist": 5,"cost": 0},"leg3": {"transport": "Uber","legTime": 4,"legDist": 10,"cost": 15},"leg4": {"transport": "Car","legTime": 20,"legDist": 15,"cost": 0},"totaltime" : 30,"totaldistance": 40,"totalcost": 10,"warning": "false"}');
+
+var jsons = $( "#json" ).text();
+var stuff = jsons.replace(/\\/g,"");
+var oh = stuff.substring(1, stuff.length-1);
+var jng = oh.substring(7, oh.length-5);
+var obj = JSON.parse(jng);
+console.log(jng);
   function initMap() {
     var directionsService = new google.maps.DirectionsService;
     var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -346,8 +357,13 @@
 </script>
 
 <script>
-  
-  var obj = JSON.parse('{"addresses": ["3146 Cascadilla Hall, Ithaca NY 14850", "3270 Balch Hall, Ithaca NY 14850", "203 N Aurora St, Ithaca NY 14850", "Klarman Hall, Ithaca NY 14850", "151 Dryden Road, Ithaca NY 14850"],"leg1": {"transport": "Car","legTime": 4,"legDist": 10,"cost": 0},"leg2": {"transport": "Walking","legTime": 2,"legDist": 5,"cost": 0},"leg3": {"transport": "Uber","legTime": 4,"legDist": 10,"cost": 15},"leg4": {"transport": "Car","legTime": 20,"legDist": 15,"cost": 0},"totaltime" : 30,"totaldistance": 40,"totalcost": 10,"warning": "false"}');
+var jsons = $( "#json" ).text();
+var stuff = jsons.replace(/\\/g,"");
+var oh = stuff.substring(1, stuff.length-1);
+var jng = oh.substring(7, oh.length-5);
+var obj = JSON.parse(jng);
+console.log(jng);
+
   var detailstext = '<font color=	"#fff">';
   if (obj.warning == "true") {
     detailstext +=  '<label>WARNING: LOCATIONS ARE TOO FAR APART FOR UBER API</label>';

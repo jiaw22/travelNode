@@ -3,7 +3,7 @@
 # The program is for adjacency matrix representation of the graph
 
 import sys  # Library for INT_MAX
-
+import json
 class Graph():
 
     def __init__(self, vertices):
@@ -15,8 +15,8 @@ class Graph():
     def printMST(self, parent):
         info = []
         print "Edge \tWeight"
-        for i in range(0,self.V-1):
-            info.append((parent[i], self.graph[i][parent[i]]))
+        for i in range(0,self.V):
+            info.append((parent[i], i, self.graph[i][parent[i]]))
             print parent[i],"-",i,"\t",self.graph[i][ parent[i] ]
                   #parent[i] = beginning point
         #    route.append(parent[i])
@@ -147,11 +147,46 @@ def construct_whole(data1, time, own_vehicle, max_time, activity_level): #num_lo
     g.graph = matrix
     nodess = g.primMST()
     locs = []
+    s_locs = '{"addresses": ['
     legs = []
     for i in range(len(nodess)):
-        locs.append(time[i+1])
-        legs.append((accessories[nodess[i][0]][nodes[i][1]][0], accessories[nodess[i][0]][nodes[i][1]][1], accessories[nodess[i][0]][nodes[i][1]][2], accessories[nodess[i][0]][nodes[i][1]][3]))
+        s_locs = s_locs + '"'  + time[i][0] + '",'
+        locs.append(time[i])
+        legs.append((accessories[nodess[i][0]][nodess[i][1]][0], accessories[nodess[i][0]][nodess[i][1]][1], accessories[nodess[i][0]][nodess[i][1]][2], accessories[nodess[i][0]][nodess[i][0]][3]))
+    s_locs = s_locs[0: len(s_locs)-1]
+    s_locs = s_locs + '],'
+    s_legs = ""
+    acc_time = 0
+    totaldistance = 0
+    totalcost = 0
+    where = 0
+    for i in range(len(legs)):
+        o = str(i + 1)
+        opss = '"leg' + o + '": {'
+        strings = opss
+        strings = strings + '"transport": "' + str(legs[i][0]) + '", "legTime": ' +  str(legs[i][1]) + ', "legDist": ' + str(legs[i][2]) + ', "cost": ' + str(legs[i][3])
+        strings = strings + '},'
+        s_legs = s_legs + strings
 
+        acc_time = acc_time + int(legs[i][1])
+        totaldistance = totaldistance + int(legs[i][2])
+        totalcost = totalcost + int(legs[i][3])
+        where = i
+    for f in range(where+1, 4):
+        o = str(f + 1)
+        opss = '"leg' + o + '": {'
+        strings = opss
+        strings = strings + '"transport": "", "legTime": "", "legDist": "", "cost": ""},'
+        s_legs = s_legs + strings
+
+    s_legs = s_legs[0: len(s_legs)-1]
+    s_legs = s_legs + ','
+    more = '"totaltime" :' + str(acc_time) + ',"totaldistance":' + str(totaldistance) + ',"totalcost" :' + str(totalcost) + ', "warning": "false"}'
+    final = str(s_locs) + str(s_legs) + more
+    print final
+    return final
+    #   "totalcost": ' + totalcost + ',
+    #   "warning": ' + warning + '
 #mode, time @ loc, walking time, cost
     # print node_order
     # print [node_order[0]][node_order[1]][1]
@@ -184,6 +219,7 @@ def construct_whole(data1, time, own_vehicle, max_time, activity_level): #num_lo
     # else:
     #     warning = "NO WARNING"
     #
+
     leg_info = '{"addresses": [' + time(node_order[0]) + '", "' + time(node_order[1]) + '", "'+ time(node_order[2]) + '", "'+ time(node_order[3]) + '", "' + time(node_order[4]) +'"],'
     leg1 = '"leg1": { "transport": ' + accessories[node_order[0]][node_order[1]][0] + ', "legTime": ' + accessories[node_order[0]][node_order[1]][1] + ', "legDist": ' + accessories[node_order[0]][node_order[1]][2] + ', "cost": ' + accessories[node_order[0]][node_order[1]][3]
     leg1 =  leg1 + '"},'
