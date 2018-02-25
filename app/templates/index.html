@@ -6,23 +6,45 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByGsgAQ_Q8gNTc-LBboVjO-eA4SMjHGtw&libraries=places"></script>
-<body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script src="../jquery/jquery.min.js"></script>
   <script src="js.js"></script>
   <link href="../static/style.css" rel="stylesheet">
   <link href="../static/style.scss" rel="stylesheet">
+  <script>
+  $(document).ready(function() {
+      var max_fields      = 5; //maximum input boxes allowed
+      var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+      var add_button      = $(".add_field_button"); //Add button ID
+
+      var x = 1; //initlal text box count
+      $(add_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x < max_fields){ //max input box allowed
+              x++; //text box increment
+              $(wrapper).append('<div><input type="text" id=location'+x+' name="location'+ x + '" placeholder="Fill in location"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+          }
+      });
+
+      $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+          e.preventDefault(); $(this).parent('div').remove(); x--;
+      })
+  });
+
+</script>
+  <body>
   <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
     <div class="w3-display-topleft w3-padding-large w3-xlarge">
       TravelNode
     </div>
     <div class="w3-display-middle">
       <div class="container">
-        <form action="/display" method="post" id="employForm"
+        <form method="post" >
         <fieldset>
+          <input id="searchTextField" type="text" size="50" placeholder="Anything you want!">
           <div class="input_fields_wrap">
-            <button class="add_field_button">Add More Locations</button>
-            <div><input type="text" id="location1" name="mytext[]" placeholder="Fill in location"></div>
+            <button class="add_field_button" formaction="">Add More Locations</button>
+            <div><input type="text" id="location1" name="location1" placeholder="Fill in location"></div>
           </div>
         <label>Do you have a personal vehicle?</label>
           <input type="checkbox" id="personalVehicle" name="vehicle" value="hasVehicle">
@@ -36,7 +58,7 @@
 
         <label>How active do you want to be? (Less active-no walking, Very active-completely walking)
           <div class="slidecontainer">
-            <input type="range" min="0" max="100" value="50" class="slider" step="50" id="myRange">
+            <input type="range" min="0" max="100" value="50" class="slider" step="50" id="myRange" name="active">
           </div>
         </label>
 
@@ -49,7 +71,7 @@
         </fieldset>
         <br>
         <br>
-        <button class="button-primary" type="submit" value="Submit" form="employForm">SUBMIT!</button>
+        <button class="button-primary" type="submit" value="Submit" formaction="/json">SUBMIT!</button></a>
       </form>
     </div>
   </div>

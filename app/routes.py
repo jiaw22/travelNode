@@ -6,7 +6,7 @@ from flask import request, jsonify
 def main():
     return render_template('index.html', title='Travel Faster, Travel Better')
 
-@app.route('/display', methods=["GET", "POST"])
+@app.route('/json', methods=["GET", "POST"])
 def display():
      result = request.form
      return jsonify(request.form)
