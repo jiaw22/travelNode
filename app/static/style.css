@@ -55,8 +55,8 @@ color :#fff;
 margin: 5px;
 }
 
-input#autocomplete {
-  width: 90%;
+input#location1, input#location2, input#location3, input#location4, input#location5 {
+  width: 80%;
 }
 
 button.add_field_button {
@@ -89,4 +89,45 @@ margin-left: 20px;
 font-size: 10px;
 text-transform: uppercase;
 text-decoration: none;
+}
+
+body {
+  list-style-type: none;
+}
+
+input#personalVehicle {
+opacity: 0;}
+
+.redBackground{
+    background-color: maroon;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+    -webkit-transition: all 600ms ease;
+    -moz-transition: all 600ms ease;
+    -ms-transition: all 600ms ease;
+    -o-transition: all 600ms ease;
+    transition: all 600ms ease;
+}
+
+.yep{
+    background-color: blue;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+    -webkit-transition: all 600ms ease;
+    -moz-transition: all 600ms ease;
+    -ms-transition: all 600ms ease;
+    -o-transition: all 600ms ease;
+    transition: all 600ms ease;
+    z-index: -1;
+}
+
+#personalVehiclelabel
+{
+  -webkit-transition: all 600ms ease;
+  -moz-transition: all 600ms ease;
+  -ms-transition: all 600ms ease;
+  -o-transition: all 600ms ease;
+  transition: all 600ms ease;
 }

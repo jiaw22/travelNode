@@ -11,7 +11,7 @@
   <script src="../jquery/jquery.min.js"></script>
   <script src="js.js"></script>
   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm5l8eUBzZXal5kBugg3UdvxiM1jflU8s&libraries=places"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
   <link href="../static/style.css" rel="stylesheet">
   <script>
@@ -26,70 +26,85 @@
         /** @type {HTMLInputElement} */
         (document.getElementById('location1')), {
           types: ['geocode']
-      });
+        });
       autocomplete2 = new google.maps.places.Autocomplete(
         /** @type {HTMLInputElement} */
         (document.getElementById('location2')), {
           types: ['geocode']
-      });
+        });
       autocomplete3 = new google.maps.places.Autocomplete(
         /** @type {HTMLInputElement} */
         (document.getElementById('location3')), {
           types: ['geocode']
-      });
+        });
       autocomplete4 = new google.maps.places.Autocomplete(
         /** @type {HTMLInputElement} */
         (document.getElementById('location4')), {
           types: ['geocode']
-      });
+        });
       autocomplete5 = new google.maps.places.Autocomplete(
         /** @type {HTMLInputElement} */
         (document.getElementById('location5')), {
           types: ['geocode']
-      });
+        });
       google.maps.event.addListener(autocomplete1, 'place_changed', function() {});
-      google.maps.event.addListener(autocomplete2, 'place_changed', function() {});
-      google.maps.event.addListener(autocomplete3, 'place_changed', function() {});
-      google.maps.event.addListener(autocomplete4, 'place_changed', function() {});
-      google.maps.event.addListener(autocomplete5, 'place_changed', function() {});
+      google.maps.event.addListener(autocomplete2, 'place_changed1', function() {});
+      google.maps.event.addListener(autocomplete3, 'place_changed2', function() {});
+      google.maps.event.addListener(autocomplete4, 'place_changed3', function() {});
+      google.maps.event.addListener(autocomplete5, 'place_changed4', function() {});
     }
   </script>
-<script>
-function geolocate() {
-    if (navigator.geolocation) {
+  <script>
+    function geolocate() {
+      if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var geolocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            var circle = new google.maps.Circle({
-                center: geolocation,
-                radius: position.coords.accuracy
-            });
-            //autocomplete.setBounds(circle.getBounds());
+          var geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          var circle = new google.maps.Circle({
+            center: geolocation,
+            radius: position.coords.accuracy
+          });
+          //autocomplete.setBounds(circle.getBounds());
         });
-    }
-}
-});
+      }
+    };
 
-$("#location1").focus(function() {
-    geolocate();
-});
-$("#location2").focus(function() {
-    geolocate();
-});
-$("#location3").focus(function() {
-    geolocate();
-});
-$("#location4").focus(function() {
-    geolocate();
-});
-$("#location5").focus(function() {
-    geolocate();
-});
-</script>
+    $("#location1").focus(function() {
+      geolocate();
+    });
+    $("#location2").focus(function() {
+      geolocate();
+    });
+    $("#location3").focus(function() {
+      geolocate();
+    });
+    $("#location4").focus(function() {
+      geolocate();
+    });
+    $("#location5").focus(function() {
+      geolocate();
+    });
+  </script>
   <script>
     $(document).ready(function() {
+
+      $("input[type='checkbox']").change(function(){
+    if($(this).is(":checked")){
+      $(this).parent().removeClass("yep",1000);
+        $(this).parent().addClass("redBackground",1000);
+        $("#personalVehiclelabel").html("I am travelling by car/foot.").fadeIn('slow');
+    }else{
+        $(this).parent().removeClass("redBackground",1000);
+        $(this).parent().addClass("yep",1000);
+        $("#personalVehiclelabel").html("I am travelling by Uber/foot.").fadeIn('slow');
+    }
+});
+      $("#location2").hide();
+      $("#location3").hide();
+      $("#location4").hide();
+      $("#location5").hide();
       var max_fields = 5; //maximum input boxes allowed
       var wrapper = $(".input_fields_wrap"); //Fields wrapper
       var add_button = $(".add_field_button"); //Add button ID
@@ -99,17 +114,40 @@ $("#location5").focus(function() {
         e.preventDefault();
         if (x < max_fields) { //max input box allowed
           x++;
-          $(wrapper).append('<div><input type="text" id="location' + x + '" onFocus="geolocate()" name="location' + x + '" placeholder="Fill in location"><a href="#" class="remove_field">Remove</a></div>'); //add input box
+          var where = "#location" + x;
+          $(where).show();
+          // $(wrapper).append('<div><input class="autocomplete" type="text" id="location' + x + '" name="location' + x + '" placeholder="Fill in location"><a href="#" class="remove_field">Remove</a></div>'); //add input box
 
         }
       });
 
       $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
         e.preventDefault();
-        $(this).parent('div').remove();
+        var where = "#location" + x;
+        $(where).hide();
+        // $(this).parent('div').remove();
         x--;
       })
     });
+  </script>
+  <script>
+    function initialize() {
+
+      var acInputs = [document.getElementById("location1"), document.getElementById("location2"), document.getElementById("location3"), document.getElementById("location4"), document.getElementById("location5")];
+      console.log(acInputs);
+
+      for (var i = 0; i < 5; i++) {
+
+        var autocomplete = new google.maps.places.Autocomplete(acInputs[i]);
+        autocomplete.inputId = acInputs[i].id;
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+          document.getElementById("log").innerHTML = 'You used input with id ' + this.inputId;
+        });
+      }
+    }
+
+    initialize();
   </script>
 </head>
 
@@ -122,13 +160,19 @@ $("#location5").focus(function() {
       <div class="container">
         <form method="post">
           <fieldset>
+
             <div class="input_fields_wrap">
-              <button class="add_field_button" formaction="">Add More Locations</button>
-              <div><input type="text" id="location1" onFocus="geolocate()" name="location1" placeholder="Fill in location"></div>
+              <div><input class="autocomplete" type="text" id="location1" name="location1" placeholder="Fill in location"></div>
+              <div><input class="autocomplete" type="text" id="location2" name="location2" placeholder="Fill in location"></div>
+              <div><input class="autocomplete" type="text" id="location3" name="location3" placeholder="Fill in location"></div>
+              <div><input class="autocomplete" type="text" id="location4" name="location4" placeholder="Fill in location"></div>
+              <div><input class="autocomplete" type="text" id="location5" name="location5" placeholder="Fill in location"></div>
             </div>
-            <label>Do you have a personal vehicle?</label>
-            <input type="checkbox" id="personalVehicle" name="vehicle" value="hasVehicle">
-            </label>
+            <button class="add_field_button" formaction="">Add More Locations</button><br />
+            <li class="yep">
+              <input type="checkbox" id="personalVehicle" name="vehicle" value="hasVehicle">
+              <label for="personalVehicle" id="personalVehiclelabel">Do you have a personal vehicle?</label>
+            </li>
             <br>
 
             <label>Time limit for journey (in hours)
