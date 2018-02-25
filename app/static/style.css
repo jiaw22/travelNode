@@ -43,3 +43,50 @@ body, html {
     background: #4CAF50;
     cursor: pointer;
 }
+
+
+input {
+width: 40%;
+background-color: #1b1b1bb8;
+border : 1px solid #1b1b1bb8;
+font-family: Roboto;
+padding: 10px;
+color :#fff;
+margin: 5px;
+}
+
+input#autocomplete {
+  width: 90%;
+}
+
+button.add_field_button {
+  font-family: Roboto;
+  background-color: transparent;
+  border: 0px;
+  padding: 10px;
+  color: #ffff;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+button.button-primary {
+  background-color: #4CAF50;
+  font-family: Roboto;
+  color: #fff;
+  border: 0px;
+  padding: 5px 10px;
+}
+
+fieldset {
+  border: 0px;
+  width: 100%;
+}
+
+a.remove_field {
+color: #d89292;
+text-shadow: 0px 0px 1px 5px #000;
+font-weight: bold;
+margin-left: 20px;
+font-size: 10px;
+text-transform: uppercase;
+text-decoration: none;
+}
