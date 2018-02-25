@@ -13,12 +13,12 @@ class Graph():
 
     # A utility function to print the constructed MST stored in parent[]
     def printMST(self, parent):
-        route = []
+        #route = []
         print "Edge \tWeight"
         for i in range(1,self.V):
             print parent[i],"-",i,"\t",self.graph[i][ parent[i] ]
-            route.append(parent[i])
-        return route
+        #    route.append(parent[i])
+        #return route
 
     '''def getPath(self, parent):
         route = []
@@ -73,7 +73,7 @@ class Graph():
                         key[v] = self.graph[u][v]
                         parent[v] = u
             #print(parent)
-
+        self.printMST(parent)
         #print key
         #route = (self.getPath(parent))
         #return route
@@ -89,21 +89,17 @@ class Graph():
 
 #for each location, choose either car time or
 #returns: (i.e. for 'A')[0 30 10 20 4]
-data1 = [(u'232 East Ave, Ithaca, NY 14850, USA', u'111 Dryden Rd, Ithaca, NY 14850, USA', 120, 9.0, 849, 0.7)]
-time = [(u'232 East Ave, Ithaca, NY 14850, USA', u'50'), (u'111 Dryden Rd, Ithaca, NY 14850, USA', u'50')]
-own_vehicle = "no"
-max_time = 4
-activity_level = 50
-'''
-def construct_whole(data, time, own_vehicle, max_time, activity_level):
-    g = Graph(len(time))
-    matrix = []
-    for i in range(len(time)): #for every row
-        row = construct_row(data1, time, own_vehicle, max_time, activity_level) #populating a row
-        matrix.append(row)
-    g.graph = matrix
-    g.primMST();
-'''
+
+# '''
+# def construct_whole(data, time, own_vehicle, max_time, activity_level):
+#     g = Graph(len(time))
+#     matrix = []
+#     for i in range(len(time)): #for every row
+#         row = construct_row(data1, time, own_vehicle, max_time, activity_level) #populating a row
+#         matrix.append(row)
+#     g.graph = matrix
+#     g.primMST();
+# '''
 def construct_whole(data1, time, own_vehicle, max_time, activity_level): #num_locs, personal_car, act_lvl
     #print time
     g = Graph(len(time))
@@ -135,12 +131,28 @@ def construct_whole(data1, time, own_vehicle, max_time, activity_level): #num_lo
 
     g.graph = matrix
     node_order = g.primMST()
+    if not node_order:
+        print "hello"
 
-    acc_time = accessories[node_order[0]][node_order[1]][1] + accessories[node_order[1]][node_order[2]][1]+accessories[node_order[2]][node_order[3]][1]+accessories[node_order[3]][node_order[4]][1]
+    # acc_time = 0
+    # for i in range(len(node_order)):
+    #     acc_time = acc_time + accessories[node_order[i]][node_order[1]][1]
 
-    total_dist = accessories[node_order[0]][node_order[1]][2] +accessories[node_order[1]][node_order[2]][2] +accessories[node_order[2]][node_order[3]][2] +accessories[node_order[3]][node_order[4]][2]
+    # acc_time = accessories[node_order[0]][node_order[1]][1] + accessories[node_order[1]][node_order[2]][1]+accessories[node_order[2]][node_order[3]][1]+accessories[node_order[3]][node_order[4]][1]
+    acc_time = 0
+    for x in range(len(node_order)):
+        acc_time = acc_time + accessories[node_order[x]][node_order[1]][1]
 
-    total_cost = accessories[node_order[0]][node_order[1]][3] +accessories[node_order[1]][node_order[2]][3] +accessories[node_order[2]][node_order[3]][3] +accessories[node_order[3]][node_order[4]][3]
+    total_dist = 0
+    for y in range(len(node_order)):
+        total_dist = total_dist + accessories[node_order[y]][node_order[y+1]][2]
+
+    # total_dist = accessories[node_order[0]][node_order[1]][2] +accessories[node_order[1]][node_order[2]][2] +accessories[node_order[2]][node_order[3]][2] +accessories[node_order[3]][node_order[4]][2]
+
+    total_cost = 0
+    for z in range(len(node_order)):
+        total_cost = total_cost + accessories[node_order[z]][node_order[z+1]][3]
+    # total_cost = accessories[node_order[0]][node_order[1]][3] +accessories[node_order[1]][node_order[2]][3] +accessories[node_order[2]][node_order[3]][3] +accessories[node_order[3]][node_order[4]][3]
 
     if acc_time > max_time:
         warning = "OVERTIME"
@@ -162,6 +174,11 @@ def construct_whole(data1, time, own_vehicle, max_time, activity_level): #num_lo
     finish =  leg_info + leg1 + leg2 + leg3 + leg4 + ending
     print finish
 
+data1 = [(u'232 East Ave, Ithaca, NY 14850, USA', u'111 Dryden Rd, Ithaca, NY 14850, USA', 120, 9.0, 849, 0.7)]
+time = [(u'232 East Ave, Ithaca, NY 14850, USA', u'50'), (u'111 Dryden Rd, Ithaca, NY 14850, USA', u'50')]
+own_vehicle = "no"
+max_time = 4
+activity_level = 50
 construct_whole(data1, time, own_vehicle, max_time, activity_level)
 #g.graph = matrix
 #g.primMST();
