@@ -14,11 +14,15 @@ def display():
      result = request.form
      return jsonify(request.form)
 
-@app.route('/route', methods=["GET", "POST"])
+@app.route('/generate', methods=["GET", "POST"])
 def route():
     result = request.form
-    inputs = jsonify(request.form)
+    input0 = jsonify(request.form)
+    inputs = request.form.to_dict()
+    print inputs
     google_input = calcLongLat(inputs)
+    times = generateTimeParam(inputs, google_input)
     jia_output = calcUberWalking(google_input)
-    caroline_work = narrow_down(jia_output)
-    return render_template('route.html', title='Travel Faster, Travel Better pt. 2')
+    caroline_work = callCaroline(inputs, jia_output, times)
+    #json.loads(j) string -> json for rids
+    return render_template('route.html', title='Travel Faster, Travel Better pt. 2', results=caroline_work)

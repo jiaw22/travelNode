@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>routepage</title>
+<title>Results</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -390,7 +390,7 @@
         detailstext += "<label>" + obj.addresses[i]+ "</label><br><br><br>"
       }
     }
-    detailstext += "<center><table style='text-align: center;'><tr><td>" + obj.totaltime + "<br />Total Time</td><td>" + obj.totalcost + "<br />Total Cost</td><td>" + obj.totaldistance + "<br />Total Distance</td></tr></table></center>"
+    detailstext += "<center><table style='text-align: center;'><tr><td><b>" + obj.totaltime + "</b><br />Total Time</td><td><b>" + obj.totalcost + "</b><br />Total Cost</td><td><b>" + obj.totaldistance + "</b><br />Total Distance</td></tr></table></center><br /><a href='/'>try again!</a>"
   }
   document.getElementById("details").innerHTML = detailstext;
 </script>

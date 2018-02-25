@@ -1,3 +1,77 @@
+body{
+  font-family: Barlow;
+  color: #fff;
+  }/* The sidebar menu */
+
+.sidenav {
+  height: 100%;
+  /* Full-height: remove this if you want "auto" height */
+  width: calc(20%);
+  /* Set the width of the sidebar */
+  position: fixed;
+  /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1;
+  /* Stay on top */
+  font-size: 12px;
+  color: #fff;
+  top: 0;
+  /* Stay at the top */
+  right: 0;
+  background-color: #0e1627;
+  /* Black */
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  padding-top: 0px;
+  padding: 20px;
+}
+
+.bgimg {
+  min-height: 100%;
+  background-position: right;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
+/* When you mouse over the navigation links, change their color */
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Style page content */
+
+.main {
+  margin-left: 160px;
+  /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+  float: left;
+  width: 80%;
+  height: 100%;
+}
+
+
 body, h1 {
   font-family: "Barlow", sans-serif
 }
@@ -6,13 +80,6 @@ body, html {
   height: 100%;
   background-color: gray;
   font-size: 13px;
-}
-
-.bgimg {
-  background-image: url('../static/media/background.jpeg');
-  min-height: 100%;
-  background-position: center;
-  background-size: cover;
 }
 
 .slider {
@@ -93,47 +160,91 @@ text-transform: uppercase;
 text-decoration: none;
 }
 
-body {
-  list-style-type: none;
+span.line_car {
+  width: 2px;
+  height: 30px;
+  background-color: #f0ff75;
+  display: inline-block;
+  margin-bottom: -10px;
+  margin-right: 20px;
+}
+span.line_uber {
+  width: 2px;
+  height: 30px;
+  background-color: #75fff9;
+  display: inline-block;
+  margin-bottom: -10px;
+  margin-right: 20px;
+}
+span.line_walk {
+  width: 2px;
+  height: 30px;
+  background-color: #ff75e8;
+  display: inline-block;
+  margin-bottom: -10px;
+  margin-right: 20px;
+}
+label {
+font-size: 15px;
+font-weight: bold;
+text-transform: uppercase;
+}
+label.path {
+  text-transform: none;
+  opacity: 0.9;
+  font-size: 12px;
 }
 
-input#personalVehicle {
-opacity: 0;}
-
-.redBackground{
-    background-color: #8c6252;
-    padding: 10px;
-    width: 90%;
-    padding-right: 20%;
-    text-align: center;
-    -webkit-transition: all 600ms ease;
-    -moz-transition: all 600ms ease;
-    -ms-transition: all 600ms ease;
-    -o-transition: all 600ms ease;
-    transition: all 600ms ease;
+h2 {
+  font-family: Barlow;
 }
 
-.yep{
-    background-color: #4e6d70;
-    padding: 10px;
-    width: 90%;
-    text-align: center;
-    padding-right: 20%;
-    -webkit-transition: all 600ms ease;
-    -moz-transition: all 600ms ease;
-    -ms-transition: all 600ms ease;
-    -o-transition: all 600ms ease;
-    transition: all 600ms ease;
-    z-index: -1;
+
+body, h1 {
+  font-family: "Barlow", sans-serif
 }
 
-#personalVehiclelabel
-{
-  -webkit-transition: all 600ms ease;
-  -moz-transition: all 600ms ease;
-  -ms-transition: all 600ms ease;
-  -o-transition: all 600ms ease;
-  transition: all 600ms ease;
+body, html {
+  height: 100%;
+  background-color: gray;
+  font-size: 13px;
+}
+
+input {
+width: 40%;
+background-color: #1b1b1bb8;
+border : 1px solid #1b1b1bb8;
+font-family: "Barlow";
+padding: 10px;
+color :#fff;
+margin: 5px;
+}
+
+input#location1, input#location2, input#location3, input#location4, input#location5 {
+  width: 80%;
+}
+
+button.add_field_button {
+  font-family: "Barlow";
+  background-color: transparent;
+  border: 0px;
+  padding: 10px;
+  color: #ffff;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+button.button-primary {
+  background-color: #98a5be;
+  font-family: Roboto;
+  color: #fff;
+  border: 0px;
+  text-transform:  uppercase;
+  padding: 5px 20px;
+}
+
+fieldset {
+  border: 0px;
+  width: 100%;
 }
 
 input.time_spent {
@@ -149,4 +260,12 @@ h1 {
 h4 {
   font-family: "Barlow";
   color: #dcdcdc;
+}
+
+table b {
+  font-size: 20px;
+  padding: 10px;
+}
+table td {
+  padding: 5px;
 }

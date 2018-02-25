@@ -4,7 +4,7 @@ import simplejson
 import json
 from uber import *
 from google_walking import *
-# from min_spanning_tree import *
+from min_spanning_tree import *
 
 def generateTimeParam(data, addr):
     times = []
@@ -23,6 +23,7 @@ def calcLongLat(data):
     i = 1
     while i < 6:
         string = "location" + str(i) #location1 field in json
+        print string
         ts = "location_time" + str(i) #location1 field in json
         loc = data[string] #get from json address
         if loc: #if location was entered
@@ -55,7 +56,6 @@ def calcUberWalking (google_longlat):
             ret.append(tup)
             j = j + 1
         i = i + 1
-    print "HUBA " + str(ret)
     return ret
 
 def callCaroline(orgdata, data1, time):
@@ -68,12 +68,8 @@ def callCaroline(orgdata, data1, time):
          own_vehicle = "no"
     max_time = data["timelimit"]
     activity_level = data["active"]
-    print data1
-    print time
-    print own_vehicle
-    print max_time
-    print activity_level
-    construct_whole(data1, time, own_vehicle, max_time, activity_level)
+    results = construct_whole(data1, time, own_vehicle, max_time, activity_level)
+    return results
 
 
 string = """{
