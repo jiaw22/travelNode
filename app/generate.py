@@ -4,7 +4,7 @@ import simplejson
 import json
 from uber import *
 from google_walking import *
-from min_spanning_tree import *
+# from min_spanning_tree import *
 
 def generateTimeParam(data, addr):
     times = []
@@ -51,7 +51,7 @@ def calcUberWalking (google_longlat):
         while j < len(google_longlat):
             u = findCostAndTime(google_longlat[i][1], google_longlat[i][2], google_longlat[j][1], google_longlat[j][2]) # cost,time
             w= getTimeAndDistance(google_longlat[i][1], google_longlat[i][2], google_longlat[j][1], google_longlat[j][2]) # time, cost
-            tup = (google_longlat[i][0], google_longlat[j][0], u[0], u[1], w[0], w[1]) # addr1, addr2, u_cost, u_time, w_time, w_cost
+            tup = (google_longlat[i][0], google_longlat[j][0], u[0], u[1], w[1], w[0]) # addr1, addr2, u_cost, u_time, w_time, w_dist
             ret.append(tup)
             j = j + 1
         i = i + 1
@@ -59,10 +59,13 @@ def calcUberWalking (google_longlat):
     return ret
 
 def callCaroline(orgdata, data1, time):
-    if data["personal"]:
-        own_vehicle = "yes"
-    else:
-        own_vehicle = "no"
+    try:
+        if data["personal"]:
+            own_vehicle = "yes"
+        else:
+            own_vehicle = "no"
+    except KeyError:
+         own_vehicle = "no"
     max_time = data["timelimit"]
     activity_level = data["active"]
     print data1
@@ -91,4 +94,5 @@ data = json.loads(string)
 ll = calcLongLat(data)
 times = generateTimeParam(data, ll)
 u_w = calcUberWalking(ll)
+callCaroline(data, u_w, times)
 # callCaroline(data, u_w, times)
