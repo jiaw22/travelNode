@@ -12,9 +12,13 @@ def main():
 @app.route('/json', methods=["GET", "POST"])
 def display():
      result = request.form
-     inputs = jsonify(request.form)
-     caroline_input =
+     return jsonify(request.form)
 
 @app.route('/route', methods=["GET", "POST"])
 def route():
-     return render_template('route.html', title='Travel Faster, Travel Better pt. 2')
+    result = request.form
+    inputs = jsonify(request.form)
+    google_input = calcLongLat(inputs)
+    jia_output = calcUberWalking(google_input)
+    caroline_work = narrow_down(jia_output)
+    return render_template('route.html', title='Travel Faster, Travel Better pt. 2')

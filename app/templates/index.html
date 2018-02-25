@@ -105,6 +105,10 @@
       $("#location3").hide();
       $("#location4").hide();
       $("#location5").hide();
+      $("#time_spent2").hide();
+      $("#time_spent3").hide();
+      $("#time_spent4").hide();
+      $("#time_spent5").hide();
       var max_fields = 5; //maximum input boxes allowed
       var wrapper = $(".input_fields_wrap"); //Fields wrapper
       var add_button = $(".add_field_button"); //Add button ID
@@ -115,7 +119,9 @@
         if (x < max_fields) { //max input box allowed
           x++;
           var where = "#location" + x;
+          var time = "#time_spent" + x;
           $(where).show();
+          $(time).show();
           // $(wrapper).append('<div><input class="autocomplete" type="text" id="location' + x + '" name="location' + x + '" placeholder="Fill in location"><a href="#" class="remove_field">Remove</a></div>'); //add input box
 
         }
@@ -124,7 +130,9 @@
       $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
         e.preventDefault();
         var where = "#location" + x;
+        var time = "#time_spent" + x;
         $(where).hide();
+        $(time).hide();
         // $(this).parent('div').remove();
         x--;
       })
@@ -159,19 +167,20 @@
     <div class="w3-display-middle">
       <div class="container">
         <form method="post">
+          * no two points can be > 100 miles apart
           <fieldset>
 
             <div class="input_fields_wrap">
-              <div><input class="autocomplete" type="text" id="location1" name="location1" placeholder="Fill in location"></div>
-              <div><input class="autocomplete" type="text" id="location2" name="location2" placeholder="Fill in location"></div>
-              <div><input class="autocomplete" type="text" id="location3" name="location3" placeholder="Fill in location"></div>
-              <div><input class="autocomplete" type="text" id="location4" name="location4" placeholder="Fill in location"></div>
-              <div><input class="autocomplete" type="text" id="location5" name="location5" placeholder="Fill in location"></div>
+              <div><input class="autocomplete" type="text" id="location1" name="location1" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent1" name="location_time1" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location2" name="location2" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent2" name="location_time2" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location3" name="location3" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent3" name="location_time3" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location4" name="location4" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent4" name="location_time4" placeholder="# mins"></div>
+              <div><input class="autocomplete" type="text" id="location5" name="location5" placeholder="Fill in location"><input class="time_spent" type="text" id="time_spent5" name="location_time5" placeholder="# mins"></div>
             </div>
             <button class="add_field_button" formaction="">Add More Locations</button><br />
             <li class="yep">
-              <input type="checkbox" id="personalVehicle" name="vehicle" value="hasVehicle">
-              <label for="personalVehicle" id="personalVehiclelabel">Do you have a personal vehicle?</label>
+              <input type="checkbox" id="personalVehicle" name="personal" value="hasVehicle">
+              <label for="personalVehicle" id="personalVehiclelabel" name="personal">Do you have a personal vehicle?</label>
             </li>
             <br>
 
