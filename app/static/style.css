@@ -33,7 +33,7 @@ body, html {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: #95b9ff;
     cursor: pointer;
 }
 
@@ -47,7 +47,7 @@ body, html {
 
 
 input {
-width: 40%;
+width: 30%;
 background-color: #1b1b1bb8;
 border : 1px solid #1b1b1bb8;
 font-family: "Barlow";
@@ -57,7 +57,7 @@ margin: 5px;
 }
 
 input#location1, input#location2, input#location3, input#location4, input#location5 {
-  width: 80%;
+  width: 85%;
 }
 
 button.add_field_button {
@@ -103,8 +103,8 @@ opacity: 0;}
 .redBackground{
     background-color: #8c6252;
     padding: 10px;
-    width: 90%;
-    padding-right: 20%;
+    width: 100%;
+    padding-right: 30%;
     text-align: center;
     -webkit-transition: all 600ms ease;
     -moz-transition: all 600ms ease;
@@ -116,9 +116,9 @@ opacity: 0;}
 .yep{
     background-color: #4e6d70;
     padding: 10px;
-    width: 90%;
+    width: 100%;
     text-align: center;
-    padding-right: 20%;
+    padding-right: 30%;
     -webkit-transition: all 600ms ease;
     -moz-transition: all 600ms ease;
     -ms-transition: all 600ms ease;
