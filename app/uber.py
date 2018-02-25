@@ -5,7 +5,7 @@ import json
 session = Session(server_token="wJFmlljkrczBkDB7k9_CPOxhgmX2KaiLd-bxlQPb")
 client = UberRidesClient(session)
 
-#hard-coded values but should be able to be changed
+#returns two outputs: duration time in seconds and cost in dollars
 def findCostAndTime (startLat,startLong,endLat,endLong,seat = 2):
     response = client.get_price_estimates(
     start_latitude= startLat,
@@ -27,7 +27,8 @@ def findCostAndTime (startLat,startLong,endLat,endLong,seat = 2):
     estimate_cost = first_JSon['high_estimate']
 
     return duration_time, estimate_cost;
-#figure out what to do for error messages
+
+#test
 returnedDuration, returnedTime = findCostAndTime(37.770,-122.411,37.791,-122.405)
 print returnedTime
 print returnedDuration
